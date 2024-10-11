@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Trends 상위 20개 검색어</title>
+</head>
+<body>
+    <h1>대한민국 실시간 Google 검색 트렌드</h1>
+    <ul id="trend-list"></ul>
+
+    <script>
+        // JSON 파일에서 데이터 가져오기
+        fetch('trending_searches.json')
+        .then(response => response.json())
+        .then(data => {
+            const trends = data.trending_searches;
+            const trendList = document.getElementById('trend-list');
+
+            // 검색어 리스트를 웹페이지에 추가
+            trends.forEach((trend, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${index + 1}. ${trend}`;
+                trendList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching the trends:', error));
+    </script>
+</body>
+</html>
